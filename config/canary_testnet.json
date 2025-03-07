@@ -1,0 +1,7 @@
+{
+  "network": "canary_testnet",
+  "ProtocolOracleAddress": "0x4B17B3428d00D5b9af2443E15f6E012596144880",
+  "ProtocolOracleStartBlock": 1332289,
+  "PoolAddressesProviderRegistryAddress": "0xf1d6c232C4aE979a050500F0411684374D0e71A4",
+  "PoolAddressesProviderRegistryStartBlock": 1332059
+}

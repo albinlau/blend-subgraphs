@@ -1,0 +1,7 @@
+{
+  "network": "edu-chain",
+  "ProtocolOracleAddress": "0x2186a6cEe4CBbde6a9E16E44C4d615f86A913DE7",
+  "ProtocolOracleStartBlock": 40000,
+  "PoolAddressesProviderRegistryAddress": "0x58cCCdafe3B0DE4cB94d35F9CcC0680E4199C06B",
+  "PoolAddressesProviderRegistryStartBlock": 40000
+}

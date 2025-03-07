@@ -1,0 +1,7 @@
+{
+  "network": "open-campus-codex",
+  "ProtocolOracleAddress": "0xb94BED7807336595d88245D1d70819A201A7A339",
+  "ProtocolOracleStartBlock": 68702,
+  "PoolAddressesProviderRegistryAddress": "0x829B25F7Bd73D71146CBd863BeAD2aC347448364",
+  "PoolAddressesProviderRegistryStartBlock": 68658
+}

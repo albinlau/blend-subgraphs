@@ -1,0 +1,7 @@
+{
+  "network": "bevm-testnet",
+  "ProtocolOracleAddress": "0xAE37A154b60461BA6C114768f80309869cf03471",
+  "ProtocolOracleStartBlock": 1619000,
+  "PoolAddressesProviderRegistryAddress": "0x9Fbc2fDFBC6B5bbca9895e28E55eb8Cc77C9cF9c",
+  "PoolAddressesProviderRegistryStartBlock": 1619000
+}

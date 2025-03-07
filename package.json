@@ -1,0 +1,33 @@
+{
+  "name": "poap-mainnet-subgraph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "prepare:mezotest": "mustache config/mezo-testnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:opencampus": "mustache config/opencampus.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:edu": "mustache config/edu.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:xdai": "mustache config/xdai.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:chiado": "mustache config/chiado.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:goerli": "mustache config/goerli.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poap-xyz/poap",
+    "deploy:xdai": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poap-xyz/poap-xdai",
+    "deploy:chiado": "goldsky subgraph deploy poap-xyz/poap-chiado",
+    "deploy:opencampus": "goldsky subgraph deploy blend-opencampus/1.0.1",
+    "deploy:edu": "goldsky subgraph deploy blend-edu/1.0.1",
+    "deploy:mezotest": "goldsky subgraph deploy blend-mezotest/1.0.1",
+    "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poap-xyz/poap-goerli",
+    "create-local": "graph create --node http://localhost:8020/ poap-xyz/poap",
+    "remove-local": "graph remove --node http://localhost:8020/ poap-xyz/poap",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 poap-xyz/poap"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.51.0",
+    "@graphprotocol/graph-ts": "0.31.0",
+    "poap-mainnet-subgraph": "file:"
+  },
+  "devDependencies": {
+    "mustache": "^4.0.1"
+  }
+}

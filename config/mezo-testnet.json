@@ -1,0 +1,7 @@
+{
+  "network": "mezo-testnet",
+  "ProtocolOracleAddress": "0x77f532df5f46DdFf1c97CDae3115271A523fa0f4",
+  "ProtocolOracleStartBlock": 2437690,
+  "PoolAddressesProviderRegistryAddress": "0xB658454350C1791a2D46cFF719bdff28972A1300",
+  "PoolAddressesProviderRegistryStartBlock": 2437690
+}
