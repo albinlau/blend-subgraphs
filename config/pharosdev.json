@@ -1,0 +1,7 @@
+{
+  "network": "pharos-devnet",
+  "ProtocolOracleAddress": "0xdF67ECBf1ea746580B52Ae4B8e0322A9c69C82df",
+  "ProtocolOracleStartBlock": 17041000,
+  "PoolAddressesProviderRegistryAddress": "0x64d6267B1B21457862B2C7e0D8c596bF5D189B97",
+  "PoolAddressesProviderRegistryStartBlock": 17041000
+}
