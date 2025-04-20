@@ -4,6 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "prepare:pharosdev": "mustache config/pharosdev.json subgraph.template.yaml > subgraph.yaml",
     "prepare:mezotest": "mustache config/mezo-testnet.json subgraph.template.yaml > subgraph.yaml",
     "prepare:opencampus": "mustache config/opencampus.json subgraph.template.yaml > subgraph.yaml",
     "prepare:edu": "mustache config/edu.json subgraph.template.yaml > subgraph.yaml",
@@ -15,9 +16,11 @@
     "deploy:xdai": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poap-xyz/poap-xdai",
     "deploy:chiado": "goldsky subgraph deploy poap-xyz/poap-chiado",
     "deploy:opencampus": "goldsky subgraph deploy blend-opencampus/1.0.1",
-    "deploy:edu": "goldsky subgraph deploy blend-edu/1.0.1",
+    "deploy:edu": "goldsky subgraph deploy blend-edu/1.0.3",
     "deploy:mezotest": "goldsky subgraph deploy blend-mezotest/1.0.1",
     "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ poap-xyz/poap-goerli",
+    "deploy:pharosdev": "goldsky subgraph deploy openfi-pharosdev/1.0.1",
+    "create:pharosdev": "graph create --node http://35.223.103.203:8020/ openfi/openfi-pharosdev",
     "create-local": "graph create --node http://localhost:8020/ poap-xyz/poap",
     "remove-local": "graph remove --node http://localhost:8020/ poap-xyz/poap",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 poap-xyz/poap"

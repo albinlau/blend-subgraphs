@@ -71,6 +71,26 @@ dataSources:
   #         handler: handleChainlinkAggregatorUpdated
   #     file: ./src/mapping/proxy-price-provider.ts
 
+  - kind: ethereum/contract
+    name: DIAOracleV2
+    network: {{network}}
+    source:
+      address: '{{DIAOracleV2Address}}'
+      startBlock: {{DIAOracleV2StartBlock}}
+      abi: DIAOracleV2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - PriceOracle
+      abis:
+        - name: DIAOracleV2
+          file: ./abis/helpers/DIAOracleV2.json
+      eventHandlers:
+        - event: OracleUpdate(string,uint128,uint128)
+          handler: handleOracleUpdate
+      file: ./src/mapping/price-oracle.ts
   # --------------------------------------
   #           CONFIGURATIONS
   # --------------------------------------

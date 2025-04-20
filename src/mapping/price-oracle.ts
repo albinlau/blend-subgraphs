@@ -5,6 +5,7 @@ import {
   EthPriceUpdated,
 } from '../../generated/templates/FallbackPriceOracle/PriceOracle';
 import { AnswerUpdated } from '../../generated/templates/ChainlinkAggregator/IExtendedPriceAggregator';
+import { OracleUpdate } from '../../generated/DIAOracleV2/DIAOracleV2';
 import { formatUsdEthChainlinkPrice, zeroBI } from '../utils/converters';
 import {
   getChainlinkAggregator,
@@ -13,7 +14,7 @@ import {
 } from '../helpers/initializers';
 import { PriceOracle } from '../../generated/schema';
 import { ProtocolOracle } from '../../generated/ProtocolOracle/ProtocolOracle';
-import { MOCK_USD_ADDRESS } from '../utils/constants';
+import { getDiaKeyToAssetEdu, MOCK_USD_ADDRESS } from '../utils/constants';
 import { genericPriceUpdate, usdEthPriceUpdate } from '../helpers/price-updates';
 
 // GANACHE
@@ -106,6 +107,62 @@ export function handleChainlinkAnswerUpdated(event: AnswerUpdated): void {
           priceOracle.save();
         }
       }
+    }
+  }
+}
+
+
+// DIA Mainnet
+export function handleOracleUpdate(event: OracleUpdate): void {
+  //OracleUpdate(string key, uint128 value, uint128 timestamp)
+  let priceOracle = getOrInitPriceOracle();
+  const diaMap = getDiaKeyToAssetEdu();
+  const oracleAssetId = diaMap.get(event.params.key);
+
+  if (oracleAssetId == null) {
+    log.error('This type is not tracked:: {}', [event.params.key]);
+    return;
+  }
+  let oracleAsset = getPriceOracleAsset(oracleAssetId!.toLowerCase());
+  if (event.params.value.gt(zeroBI())) {
+    oracleAsset.isFallbackRequired = false;
+    genericPriceUpdate(oracleAsset, event.params.value, event);
+    let updatedTokensWithFallback = [] as string[];
+    if (priceOracle.tokensWithFallback.includes(oracleAsset.id)) {
+      for (let i = 0; i > priceOracle.tokensWithFallback.length; i++) {
+        if ((priceOracle.tokensWithFallback as string[])[i] != oracleAsset.id) {
+          updatedTokensWithFallback.push((priceOracle.tokensWithFallback as string[])[i]);
+        }
+      }
+      priceOracle.tokensWithFallback = updatedTokensWithFallback;
+      priceOracle.save();
+    }
+  } else {
+    // oracle answer invalid, start using fallback oracle
+    oracleAsset.isFallbackRequired = true;
+    let proxyPriceProvider = ProtocolOracle.bind(
+      Address.fromString(priceOracle.proxyPriceProvider.toHexString())
+    );
+    let assetPrice = proxyPriceProvider.try_getAssetPrice(Address.fromString(oracleAsset.id));
+    if (!assetPrice.reverted) {
+      genericPriceUpdate(oracleAsset, assetPrice.value, event);
+    } else {
+      log.error(
+        'OracleAssetId: {} | ProxyPriceProvider: {} | EventParamsCurrent: {} | EventAddress: {}',
+        [
+          oracleAsset.id,
+          priceOracle.proxyPriceProvider.toHexString(),
+          event.params.value.toString(),
+          event.address.toHexString(),
+        ]
+      );
+    }
+
+    if (!priceOracle.tokensWithFallback.includes(oracleAsset.id)) {
+      let updatedTokensWithFallback = priceOracle.tokensWithFallback;
+      updatedTokensWithFallback.push(oracleAsset.id);
+      priceOracle.tokensWithFallback = updatedTokensWithFallback;
+      priceOracle.save();
     }
   }
 }

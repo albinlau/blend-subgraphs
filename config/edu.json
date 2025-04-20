@@ -3,5 +3,7 @@
   "ProtocolOracleAddress": "0x2186a6cEe4CBbde6a9E16E44C4d615f86A913DE7",
   "ProtocolOracleStartBlock": 40000,
   "PoolAddressesProviderRegistryAddress": "0x58cCCdafe3B0DE4cB94d35F9CcC0680E4199C06B",
-  "PoolAddressesProviderRegistryStartBlock": 40000
+  "PoolAddressesProviderRegistryStartBlock": 40000,
+  "DIAOracleV2Address": "0x56BddAc934157c213c37864e3443E5196b47a1d1",
+  "DIAOracleV2StartBlock": 40000
 }
